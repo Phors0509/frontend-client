@@ -1,77 +1,77 @@
-# name: CI/CD Pipeline for Frontend Client
+name: CI/CD Pipeline for Frontend Client
 
-# on:
-#   push:
-#     branches:
-#       - main
-#     paths:
-#       - "apps/frontend-client/**"
-#   pull_request:
-#     branches:
-#       - main
-#     paths:
-#       - "apps/frontend-client/**"
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/frontend-client/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "apps/frontend-client/**"
 
-# defaults:
-#   run:
-#     working-directory: "apps/frontend-client"
+defaults:
+  run:
+    working-directory: "apps/frontend-client"
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-#       - name: Set up Node.js
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: "20"
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
-#       - name: Install dependencies for frontend-client
-#         run: yarn install
+      - name: Install dependencies for frontend-client
+        run: yarn install
 
-#       - name: Build the Next.js project
-#         run: yarn build
+      - name: Build the Next.js project
+        run: yarn build
 
-#   deploy:
-#     runs-on: ubuntu-latest
-#     needs: build
-#     if: github.ref == 'refs/heads/main'
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
 
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-#       - name: Set up Node.js
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: "20"
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
-#       - name: Install dependencies for frontend-client
-#         run: yarn install
+      - name: Install dependencies for frontend-client
+        run: yarn install
 
-#       - name: Set Environment Variables
-#         run: |
-#           echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" > $GITHUB_ENV
-#           echo "NEXT_PUBLIC_AUTH_ENDPOINT=${{ secrets.NEXT_PUBLIC_AUTH_ENDPOINT }}" >> $GITHUB_ENV
-#           echo "NEXT_PUBLIC_USER_ENDPOINT=${{ secrets.NEXT_PUBLIC_USER_ENDPOINT }}" >> $GITHUB_ENV
-#           echo "NEXT_PUBLIC_JOB_ENDPOINT=${{ secrets.NEXT_PUBLIC_JOB_ENDPOINT }}" >> $GITHUB_ENV
-#           echo "NEXT_PUBLIC_COMPANY_ENDPOINT=${{ secrets.NEXT_PUBLIC_COMPANY_ENDPOINT }}" >> $GITHUB_ENV
-#           echo "NEXT_PUBLIC_PUSH_NOTIFICATION_ENDPOINT=${{ secrets.NEXT_PUBLIC_PUSH_NOTIFICATION_ENDPOINT }}" >> $GITHUB_ENV
-#           echo "NEXT_PUBLIC_CONVERSATION_ENDPOINT=${{ secrets.NEXT_PUBLIC_CONVERSATION_ENDPOINT }}" >> $GITHUB_ENV
-#           echo "NEXT_PUBLIC_VAPID_PUBLIC_KEY=${{ secrets.NEXT_PUBLIC_VAPID_PUBLIC_KEY }}" >> $GITHUB_ENV
-#           echo "UPLOADTHING_TOKEN=${{ secrets.UPLOADTHING_TOKEN }}" >> $GITHUB_ENV
-#           echo "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}" >> $GITHUB_ENV
+      - name: Set Environment Variables
+        run: |
+          echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" > $GITHUB_ENV
+          echo "NEXT_PUBLIC_AUTH_ENDPOINT=${{ secrets.NEXT_PUBLIC_AUTH_ENDPOINT }}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_USER_ENDPOINT=${{ secrets.NEXT_PUBLIC_USER_ENDPOINT }}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_JOB_ENDPOINT=${{ secrets.NEXT_PUBLIC_JOB_ENDPOINT }}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_COMPANY_ENDPOINT=${{ secrets.NEXT_PUBLIC_COMPANY_ENDPOINT }}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_PUSH_NOTIFICATION_ENDPOINT=${{ secrets.NEXT_PUBLIC_PUSH_NOTIFICATION_ENDPOINT }}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_CONVERSATION_ENDPOINT=${{ secrets.NEXT_PUBLIC_CONVERSATION_ENDPOINT }}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_VAPID_PUBLIC_KEY=${{ secrets.NEXT_PUBLIC_VAPID_PUBLIC_KEY }}" >> $GITHUB_ENV
+          echo "UPLOADTHING_TOKEN=${{ secrets.UPLOADTHING_TOKEN }}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}" >> $GITHUB_ENV
 
-#       - name: Configure AWS Credentials
-#         uses: aws-actions/configure-aws-credentials@v4
-#         with:
-#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#           aws-region: us-west-2
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
 
-#       - name: Deploy to AWS with SST
-#         run: npx sst deploy --stage production
-#         working-directory: "apps/frontend-client"
+      - name: Deploy to AWS with SST
+        run: npx sst deploy --stage production
+        working-directory: "apps/frontend-client"
