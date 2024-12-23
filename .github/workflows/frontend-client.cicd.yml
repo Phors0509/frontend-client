@@ -4,18 +4,9 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "apps/frontend-client/**"
   pull_request:
     branches:
       - main
-    paths:
-      - "apps/frontend-client/**"
-
-defaults:
-  run:
-    working-directory: "apps/frontend-client"
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -74,4 +65,3 @@ jobs:
 
       - name: Deploy to AWS with SST
         run: npx sst deploy --stage production
-        working-directory: "apps/frontend-client"
