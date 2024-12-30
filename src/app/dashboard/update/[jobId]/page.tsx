@@ -4,12 +4,12 @@ import axiosInstance from "@/utils/axios";
 import { Jobs } from "@/utils/types/form-type";
 import { API_ENDPOINTS } from "@/utils/const/api-endpoints";
 import JobForm from "@/components/jobs/job-form";
+import JobFormSkeleton from "@/components/jobs/JobFormSkeleton";
 
 const UpdateJobPage = ({ params }: { params: { jobId: string } }) => {
   const [jobData, setJobData] = useState<Jobs>();
   const [isLoading, setLoading] = useState<boolean>(false);
   useEffect(() => {
-    console.log("Fetching job data for Job ID:", params.jobId); // Log the jobId
     async function fetchData() {
       try {
         setLoading(true);
@@ -17,10 +17,9 @@ const UpdateJobPage = ({ params }: { params: { jobId: string } }) => {
           `${API_ENDPOINTS.JOB_ENDPOINT}/${params.jobId}`
         );
         setJobData(response.data.data);
+        setLoading(false);
       } catch (err) {
         console.log(err);
-      } finally {
-        setLoading(false);
       }
     }
     fetchData();
@@ -28,9 +27,7 @@ const UpdateJobPage = ({ params }: { params: { jobId: string } }) => {
   }, []);
   return (
     <>
-      {!isLoading && (
-        <JobForm formTitle="Update Job" existingData={jobData} typeOfForm="PUT" />
-      )}
+      {isLoading ? ( <JobFormSkeleton/> ) : ( <JobForm formTitle="Update Job" existingData={jobData} typeOfForm="PUT" /> )}
     </>
   );
 };

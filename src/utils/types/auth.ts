@@ -15,9 +15,13 @@ export interface UserData {
 export interface SignUpData {
     sur_name: string;
     last_name: string;
-    email?: string;
-    phone_number?: string;
+    email: string;
     password: string;
+    confirmPassword: string;
+    contact: {
+        phone_number: string;
+    };
+    employee_count: string;
 }
 
 export interface VerifyCodeData {
@@ -28,7 +32,6 @@ export interface VerifyCodeData {
 
 export interface SignInData {
     email: string;
-    phone_number: string;
     password: string;
 }
 

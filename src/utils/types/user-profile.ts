@@ -1,4 +1,5 @@
 export interface BasicInfo {
+  name?: string
   surname: string;
   lastname: string;
   career: string;

@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function EditProfileSkeleton() {
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white dark:bg-black rounded-lg shadow-lg">
+    <div className="max-w-3xl mx-auto p-6 bg-white dark:bg-[#1e2746] rounded-lg shadow-lg">
       <Skeleton className="h-8 w-48 mb-6" />
       
       <div className="space-y-8">

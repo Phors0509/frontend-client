@@ -25,8 +25,8 @@ export function ConversationListItem({
     <div 
       onClick={onClick}
       className={`
-        flex items-center p-3 hover:bg-gray-50 cursor-pointer transition-colors
-        ${isSelected ? 'bg-blue-50' : ''}
+        flex items-center p-3 hover:bg-gray-50 dark:hover:bg-[#171d34] cursor-pointer transition-colors 
+        ${isSelected ? 'bg-blue-50 dark:bg-[#171d34]' : ''}
       `}
     >
       <div className="relative mr-3">

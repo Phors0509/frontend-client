@@ -8,7 +8,7 @@ interface DescriptionsProps {
 export function DescriptionsSection({ descriptions }: DescriptionsProps) {
   return (
     <div className="grid gap-2 md:grid-cols-2 ">
-      <Card className="p-5">
+      <Card className="p-5 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border rounded-md">
         <CardHeader className="pb-5">
           <CardTitle>About Me</CardTitle>
         </CardHeader>
@@ -17,7 +17,7 @@ export function DescriptionsSection({ descriptions }: DescriptionsProps) {
         </CardContent>
       </Card>
 
-      <Card className="p-5">
+      <Card className="p-5 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border rounded-md">
         <CardHeader className="pb-5">
           <CardTitle>Strengths</CardTitle>
         </CardHeader>

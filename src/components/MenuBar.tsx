@@ -20,6 +20,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useRouter } from "next/navigation";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export const MenuBar = () => {
   const {user ,signOut }=useAuth()
@@ -33,13 +34,11 @@ export const MenuBar = () => {
   };
 
   return (
-    <Menubar className="w-full py-8 bg-white dark:bg-black fixed top-0 z-40">
+    <Menubar className="w-full py-8 bg-white dark:bg-[#1e2746] fixed top-0 z-40">
       <div className="w-1/6 flex items-center">
         <SidebarGroup>
           <SidebarGroupLabel>
-            <div>
               <Image src={SabaiROkLogo} width={100} height={100} alt="logo" />
-            </div>
           </SidebarGroupLabel>
         </SidebarGroup>
       </div>
@@ -69,13 +68,10 @@ export const MenuBar = () => {
           <span className="text-sm"> {user?.name}</span>
           <DropdownMenu>
           <DropdownMenuTrigger>
-            <Image
-              src={user?.profile || ""}
-              className={"w-11 h-11 rounded-full object-cover"}
-              alt={user?.name || ""}
-              width={40}
-              height={40}
-            />
+          <Avatar>
+            <AvatarImage src={user?.profile } className="w-15 h-15" />
+            <AvatarFallback>{user?.name || ""}</AvatarFallback>
+          </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>

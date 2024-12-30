@@ -38,11 +38,6 @@ const routes: Route[] = [
         icon: List,
         href: "dashboard/jobs",
       },
-      // {
-      //   label: "View Jobs",
-      //   icon: Sheet,
-      //   href: "dashboard/viewJobs",
-      // },
       {
         label: "View Applicant",
         icon: UserCircle,
@@ -167,8 +162,7 @@ export default function SideBarCom() {
   const { isOpen } = useSidebarContext();
   return (
     <ScrollArea className={cn("pt-16 h-screen transition-all duration-300" , isOpen ? "w-80" : "w-28" )}>
-      <div
-        className={cn("space-y-4 flex flex-col h-full dark:bg-gray-900 text-gray-800 dark:text-white transition-all duration-300 border-r",isOpen ? "w-full" : "w-full items-center")}>
+      <div className={cn("space-y-4 flex flex-col h-full dark:bg-[#1e2746] text-gray-800 dark:text-white transition-all duration-300 border-r",isOpen ? "w-full" : "w-full items-center")}>
         <div className="px-3 py-2 flex-1">
           <div className="space-y-1">
             {routes.map((route) => (

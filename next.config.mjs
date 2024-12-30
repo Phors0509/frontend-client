@@ -1,21 +1,26 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
   compiler: {
-    // Remove console logs only in production
     removeConsole: process.env.NODE_ENV === "production",
   },
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**", // This allows images from any remote source
+        hostname: "**", 
       },
     ],
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  // Force trailing slash to prevent redirect loops
+  trailingSlash: true,
   async headers() {
     return [
       {
-        source: '/(.*)', // Apply the headers to all routes
+        source: '/(.*)',
         headers: [
           {
             key: "X-Content-Type-Options",

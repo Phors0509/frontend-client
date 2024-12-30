@@ -35,7 +35,7 @@ export function DeleteApplication( { applyId ,onStatusUpdate }: DeleteApplicatio
       <DialogTrigger asChild>
       <Trash className="h-[35px] w-[35px] p-2 bg-red-100 hover:bg-green-200 text-red-500 rounded-full "/>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-slate-100 p-5">
+      <DialogContent className="sm:max-w-[425px] bg-slate-100 p-5 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border rounded-md">
         <DialogHeader>
           <DialogTitle>Delete Application</DialogTitle>
           <DialogDescription className="mt-2">

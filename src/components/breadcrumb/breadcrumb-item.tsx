@@ -25,7 +25,7 @@ export function BreadcrumbItemComponent({
     <>
       <BreadcrumbItem>
         {isLast ? (
-          <span className="font-medium text-white bg-orange-500 px-2 py-1 rounded">
+          <span className="font-medium text-white bg-orange-500 px-2 py-1 rounded dark:text-gray-100">
             {formattedLabel}
           </span>
         ) : (
@@ -33,7 +33,7 @@ export function BreadcrumbItemComponent({
             <Link 
               href={href}
               className={cn(
-                "text-gray-600 hover:text-orange-500 transition-colors",
+                "text-gray-600 hover:text-orange-500 transition-colors dark:text-gray-100",
                 "px-2 py-1 rounded",
                 "hover:underline underline-offset-4"
               )}

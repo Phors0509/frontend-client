@@ -1,4 +1,11 @@
-import { X,Clock4,MapPin } from "lucide-react";
+import {
+  X,
+  Clock4,
+  MapPin,
+  CalendarHeart,
+  User,
+  BriefcaseBusiness,
+} from "lucide-react";
 
 import { formatEventTime } from "@/utils/calendar-helpers";
 import { InterviewEvent } from "@/utils/types/calendar";
@@ -23,44 +30,82 @@ export const EventModal = ({ event, onClose }: EventModalProps) => {
             <X />
           </button>
         </div>
-
-        <div className="space-y-4">
-          <div>
-            <label className="block text-[16px] font-medium dark:text-gray-200">
-              Candidate Name
-            </label>
-            <p className="text-gray-900 text-[14px] dark:text-gray-100">
-              {event.title}
-            </p>
-          </div>
-
-          <div>
-            <label className="block text-[16px] font-medium dark:text-gray-200">
-              Position
-            </label>
-            <p className="text-gray-900 text-[14px] dark:text-gray-100">
-              {event.jobType}
-            </p>
-          </div>
-          <div className="flex justify-between">
+        <div className="space-y-2">
+          <div className="flex items-start gap-x-2">
+            <div className="p-1">
+              <User className="h-[20px]" />
+            </div>
             <div>
               <label className="block text-[16px] font-medium dark:text-gray-200">
-                Location
+                Candidate Name
               </label>
-              <p className="text-gray-900 flex gap-1 items-center text-[14px] dark:text-gray-100">
-                <MapPin className="h-[16px]"/>
-                {event.interviewLocation}
+              <p className="text-gray-900 text-[14px] dark:text-gray-100">
+                {event.title}
               </p>
             </div>
-
+          </div>
+          {/* Position */}
+          <div className="flex items-start gap-x-2">
+            <div className="p-1">
+              <BriefcaseBusiness className="h-[20px]" />
+            </div>
             <div>
               <label className="block text-[16px] font-medium dark:text-gray-200">
-                Interview Time
+                Position
               </label>
-              <p className="text-gray-900 flex gap-1 items-center text-[14px] dark:text-gray-100">
-                <Clock4 className="h-[16px]" />
-                {event.start && event.end ? `${formatEventTime(event.start)} - ${formatEventTime(event.end)}` : 'Time not available'}
+              <p className="text-gray-900 text-[14px] dark:text-gray-100">
+                {event.jobType}
               </p>
+            </div>
+          </div>
+          {/* Date */}
+          <div className="flex items-start gap-x-2">
+            <div className="p-1">
+              <CalendarHeart className="h-[20px]" />
+            </div>
+            <div>
+              <label className="block text-[16px] font-medium dark:text-gray-200">
+                Date
+              </label>
+              <p className="text-gray-900 text-[14px] dark:text-gray-100">
+                {event.interviewDate
+                  ? event.interviewDate.toDateString()
+                  : "Interview date not set"}
+              </p>
+            </div>
+          </div>
+          {/* Location and Interview Time */}
+          <div className="flex justify-between">
+            {/* Location */}
+            <div className="flex items-start gap-x-2">
+              <div className="p-1">
+                <MapPin className="h-[20px]" />
+              </div>
+              <div>
+                <label className="block text-[16px] font-medium dark:text-gray-200">
+                  Location
+                </label>
+                <p className="text-gray-900 text-[14px] dark:text-gray-100">
+                  {event.interviewLocation}
+                </p>
+              </div>
+            </div>
+
+            {/* Interview Time */}
+            <div className="flex items-start gap-x-2">
+              <div className="p-1">
+                <Clock4 className="h-[20px]" />
+              </div>
+              <div>
+                <label className="block text-[16px] font-medium dark:text-gray-200">
+                  Interview Time
+                </label>
+                <p className="text-gray-900 flex gap-1 items-center text-[14px] dark:text-gray-100">
+                  {event.start && event.end
+                    ? `${formatEventTime(event.start)} - ${formatEventTime(event.end)}`
+                    : "Time not available"}
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
-  SortingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -95,7 +94,7 @@ export function DataTable<TData, TValue>({
         onChange={(event) =>
           table.getColumn("name")?.setFilterValue(event.target.value)
         }
-        className="max-w-sm"
+           className="max-w-sm bg-gray-100 border border-gray-200 "
       />
         </div>
 

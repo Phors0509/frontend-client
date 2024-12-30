@@ -7,7 +7,7 @@ interface BasicInfoProps {
 
 export function BasicInfoSection({ basic }: BasicInfoProps) {
   return (
-    <Card className="gap-2 p-5">
+    <Card className="gap-2 p-5 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border rounded-md">
       <CardHeader className="pb-5">
         <CardTitle>Basic Information</CardTitle>
       </CardHeader>

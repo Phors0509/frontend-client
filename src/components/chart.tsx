@@ -15,12 +15,12 @@ import { ApplyMonthlyParams } from "@/app/dashboard/chart/chart";
 const chartConfig = {};
 function ChartComponent({applyMonthly,colors}:{applyMonthly:ApplyMonthlyParams[],colors:string[]}) {
   return (
-    <div className="font-roboto h-auto">
+    <div className="font-roboto h-full">
 
-        <Card className="w-full h-full">
+        <Card className="w-full h-full p-10 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border border-gray-200 rounded-[5px] justify-center items-center flex">
           {/* Content with flexible height */}
-          <CardContent className="w-full h-11/12">
-            <ChartContainer config={chartConfig}>
+          <CardContent className="w-full h-auto relative">
+            <ChartContainer config={chartConfig} className="h-full">
               <AreaChart
                 width={600}
                 height={250}
@@ -64,10 +64,7 @@ function ChartComponent({applyMonthly,colors}:{applyMonthly:ApplyMonthlyParams[]
                   )}
               </AreaChart>
             </ChartContainer>
-          </CardContent>
-
-          {/* Footer */}
-          <CardFooter className="flex justify-between items-center">
+            <div className="flex justify-between items-center">
             <div className="flex gap-4">
               <Button variant="outline">Monthly</Button>
             </div>
@@ -75,7 +72,8 @@ function ChartComponent({applyMonthly,colors}:{applyMonthly:ApplyMonthlyParams[]
               <TrendingUp className="h-4 w-4" />
               Export PDF
             </Button>
-          </CardFooter>
+            </div>
+          </CardContent>
         </Card>
     </div>
   );

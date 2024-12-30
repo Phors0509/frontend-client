@@ -4,7 +4,7 @@ const JobFormSkeleton = () => {
     return (
         <div className="flex min-h-screen">
             <div className="w-full">
-                <div className="bg-white shadow-lg rounded-lg p-6 space-y-6">
+                <div className="bg-white shadow-lg rounded-lg p-6 space-y-6 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border">
                     <div className="space-y-2 text-center">
                         <div className="h-8 w-48 bg-gray-200 rounded animate-pulse mx-auto" />
                         <div className="h-4 w-64 bg-gray-200 rounded animate-pulse mx-auto" />

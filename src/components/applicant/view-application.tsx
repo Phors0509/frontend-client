@@ -96,7 +96,7 @@ export function ViewApplication({
       <DialogTrigger asChild>
           <Eye className=" h-[35px] w-[35px] p-2 bg-green-100 hover:bg-green-200 text-green-500 rounded-full " />
       </DialogTrigger>
-      <DialogContent className="max-w-3xl bg-slate-50 h-full overflow-y-auto ">
+      <DialogContent className="max-w-3xl bg-slate-50 h-full overflow-y-auto dark:bg-[#181f39] dark:border-gray-700 dark:shadow-md border">
         <ScrollArea>
           <DialogHeader className="py-5">
             <DialogTitle>Application Details</DialogTitle>
@@ -114,7 +114,7 @@ export function ViewApplication({
             <TabsContent value="info" className="h-full overscroll-y-auto">
               <div className="space-y-2">
                 <Card>
-                  <CardHeader className="flex gap-4 p-5">
+                  <CardHeader className="flex gap-4 p-5 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border rounded-md">
                     <div className="flex justify-between">
                       <div className="flex items-center gap-3">
                       <h4 className="text-sm font-medium mb-1">
@@ -128,7 +128,7 @@ export function ViewApplication({
                   </CardHeader>
                 </Card>
                 <Card>
-                  <CardHeader className="flex gap-4 p-5">
+                  <CardHeader className="flex gap-4 p-5 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border rounded-md">
                     <div className="flex justify-between">
                       <div className="flex items-center gap-3">
                         <Image
@@ -140,8 +140,8 @@ export function ViewApplication({
                         />
                         <div className="flex flex-col">
                           <CardTitle>
-                            {userDetail?.basic?.surname}{" "}
-                            {userDetail?.basic?.lastname}
+                            {userDetail?.basic?.name}{" "}
+                            {/* {userDetail?.basic?.lastname} */}
                           </CardTitle>
                         </div>
                       </div>

@@ -8,12 +8,10 @@ interface ProfileProps {
 
 export function Profile({ user }: ProfileProps) {
   return (
-    <div className="w-full mx-auto bg-white dark:bg-black rounded-lg shadow-lg overflow-hidden">
+    <div className="w-full mx-auto bg-white dark:bg-[#1e2746] rounded-lg shadow-lg overflow-hidden mb-5">
       <ProfileHeader name={user?.name} profile={user?.profile} />
-      <div className="text-center mt-20">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          {user?.name}
-        </h1>
+      <div className="text-center mt-20 dark:bg-[#1e2746]">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100"> {user?.name} </h1>
       </div>
       <ProfileInfo data={user} />
     </div>

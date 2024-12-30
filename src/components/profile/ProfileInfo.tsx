@@ -11,9 +11,9 @@ export function ProfileInfo({ data }: ProfileInfoProps) {
   return (
     <div className="mt-5">
       <div className="text-center mb-8">
-      <div className="mt-4 text-gray-600 max-w-2xl mx-auto prose list-item" dangerouslySetInnerHTML={{ __html: data?.description || 'No description available' }} />
+      <div className="mt-4 text-gray-600 max-w-2xl mx-auto prose list-item dark:text-gray-300" dangerouslySetInnerHTML={{ __html: data?.description || 'No description available' }} />
       </div>
-      <div className="py-7 bg-slate-100 dark:bg-black  w-full px-5">
+      <div className="py-7 bg-slate-100 dark:bg-[#1e2746] w-full px-5  border dark:border-t-gray-700">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-3">
             <div className="flex items-center text-gray-600 dark:text-white">

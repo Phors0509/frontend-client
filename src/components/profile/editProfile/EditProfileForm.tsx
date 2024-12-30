@@ -68,7 +68,7 @@ export function EditProfileForm({ initialData, onSubmit }: EditProfileFormProps)
 
   return (
     <ScrollArea className='h-screen'>
-    <form onSubmit={handleSubmit} className="max-w-3xl mx-auto p-6 bg-white dark:bg-black rounded-lg shadow-lg">
+    <form onSubmit={handleSubmit} className=" w-full p-6 bg-white dark:bg-[#1e2746] rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold text-gray-900 mb-6 dark:text-white">Personal Information</h2>
       <div className="space-y-8 ">
         <PersonalInfoSection 

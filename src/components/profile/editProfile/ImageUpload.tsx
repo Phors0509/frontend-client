@@ -34,7 +34,7 @@ export function ImageUpload({ currentImage, onFileSelect }: ImageUploadProps) {
       
       {/* Image Preview */}
       {(currentImage ) && (
-        <div className='flex justify-center items-center w-full bg-slate-100 rounded-md p-1'>
+        <div className='flex justify-center items-center w-full bg-slate-100 rounded-md p-1 dark:bg-[#2e3961]'>
           <div className="relative w-32 h-32">
             <Image
               src={currentImage}

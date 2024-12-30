@@ -15,6 +15,9 @@ const JobDelete = ({ jobFromCol, fetchJobs, router }: any) => {
       const response = await axiosInstance.delete(
         `${API_ENDPOINTS.JOB_ENDPOINT}/${jobFromCol._id}`
       );
+      await axiosInstance.delete(
+        `${API_ENDPOINTS.APPLY_DELETE_MANY}/${jobFromCol._id}`
+      );
       await fetchJobs();
       console.log("Delete Response:", response.data);
       router.push("/dashboard/jobs");

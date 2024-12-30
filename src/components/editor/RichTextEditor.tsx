@@ -61,7 +61,7 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
   }, [editor, content]);
 
   return (
-    <div className="border rounded-lg overflow-hidden" onClick={(e) => e.stopPropagation()}>
+    <div className="border rounded-lg overflow-hidden dark:border-gray-400 " onClick={(e) => e.stopPropagation()}>
       <MenuBar editor={editor} />
       <EditorContent editor={editor} />
     </div>

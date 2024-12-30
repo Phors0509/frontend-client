@@ -11,7 +11,7 @@ interface SkillsExpertiseProps {
 export function SkillsExpertiseSection({ skills, expertise }: SkillsExpertiseProps) {
   return (
     <div className="grid gap-2 md:grid-cols-2">
-      <Card className="p-5">
+      <Card className="p-5 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border rounded-md">
         <CardHeader className="pb-5">
           <CardTitle>Skills</CardTitle>
         </CardHeader>
@@ -28,7 +28,7 @@ export function SkillsExpertiseSection({ skills, expertise }: SkillsExpertisePro
         </CardContent>
       </Card>
 
-      <Card className="p-5">
+      <Card className="p-5 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border rounded-md">
         <CardHeader className="pb-5">
           <CardTitle>Expertise</CardTitle>
         </CardHeader>

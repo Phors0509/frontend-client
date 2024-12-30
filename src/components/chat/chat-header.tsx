@@ -10,7 +10,7 @@ interface ChatHeaderProps {
 
 export function ChatHeader({ name, profile, onBack, isOnline }: ChatHeaderProps) {
   return (
-    <div className="p-3 bg-white border-b flex items-center justify-between">
+    <div className="p-3 bg-white border-b flex items-center justify-between dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border">
       <div className="flex items-center space-x-3">
         <button onClick={onBack} className="md:hidden">
           <ChevronLeft />

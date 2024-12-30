@@ -50,45 +50,62 @@ const chartConfig = {
     color: "#259AE6", // Tailwind color: blue-500
   },
 } satisfies ChartConfig;
-
+const defaultPieData = {
+  browser: "No Data",
+  applicants: 275,
+  fill: arrColor[0],
+};
 function PieChartComponent({
   applyData = [],
 }: {
   applyData: ApplyDataLengthParams[];
 }) {
-  const [chartData, setChartData] = useState<ChartDataParams[]>([]);
+  const [chartData, setChartData] = useState<ChartDataParams[]>([
+    defaultPieData,
+  ]);
 
   useEffect(() => {
     let applyArr: ChartDataParams[] = [];
+    let allZero = true;
+
     applyData.forEach((data: ApplyDataLengthParams, index: number) => {
-      if (index <= 2)
+      const applicants = data.length;
+      if (applicants > 0) {
+        allZero = false;
+      }
+
+      if (index <= 2) {
         applyArr.push({
           browser: data.title,
-          applicants: data.length,
+          applicants,
           fill: arrColor[index],
         });
-      else if (index == 3)
+      } else if (index == 3) {
         applyArr.push({
           browser: "other",
-          applicants: data.length,
+          applicants,
           fill: arrColor[index],
         });
-      else applyArr[3].applicants += data.length;
+      } else {
+        applyArr[3].applicants += applicants;
+      }
     });
-    setChartData(
-      applyArr.length > 0
-        ? applyArr
-        : [{ browser: "chrome", applicants: 275, fill: arrColor[0] }]
-    );
-    //eslint-disable-next-line
+
+    if (allZero) {
+      // If all applicants are zero, set default chart data
+      setChartData([defaultPieData]);
+    } else {
+      setChartData(applyArr);
+    }
   }, [applyData]);
+
   const totalApplicants = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.applicants, 0);
     //eslint-disable-next-line
   }, [chartData]);
   return (
-    <div className="h-auto">
-      <Card className="flex flex-col justify-center gap-[87px] shadow-md">
+    <div className="h-full">
+      <Card className="flex flex-col w-full h-full justify-center gap-[87px] shadow-md dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border p-[20px] rounded-[5px]">
         <CardHeader>
           <CardTitle>Pie Chart - Number Of Apply</CardTitle>
           <CardDescription>For Each Job</CardDescription>
@@ -96,9 +113,9 @@ function PieChartComponent({
         <CardContent>
           <ChartContainer
             config={chartConfig}
-            className="relative w-[300px] h-[300px] "
+            className=" w-[300px] h-[300px] m-auto "
           >
-            <PieChart className="absolute">
+            <PieChart className=" ">
               <ChartTooltip
                 cursor={false}
                 content={<ChartTooltipContent hideLabel />}
@@ -124,7 +141,7 @@ function PieChartComponent({
                           <tspan
                             x={viewBox.cx}
                             y={viewBox.cy}
-                            className="fill-foreground text-3xl font-bold"
+                            className="text-3xl font-bold fill-foreground"
                           >
                             {totalApplicants.toLocaleString()}
                           </tspan>

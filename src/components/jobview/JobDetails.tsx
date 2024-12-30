@@ -1,19 +1,15 @@
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { JobTechnicalDetail } from "@/utils/types/job";
-import { Share2, Printer } from "lucide-react";
 
 interface JobDetailsProps {
   details: JobTechnicalDetail | null;
 }
 
 export const JobDetail: React.FC<JobDetailsProps> = ({ details }) => {
-  // Fallback UI if details is null
   if (!details) {
     return <div className="text-gray-500">Job details not available.</div>;
   }
 
-  // Updated DetailRow to handle different data types
   const DetailRow = ({
     label,
     value,
@@ -22,8 +18,8 @@ export const JobDetail: React.FC<JobDetailsProps> = ({ details }) => {
     value: string | string[] | object | null | undefined;
   }) => (
     <div className="grid grid-cols-2 gap-4">
-      <span className="text-gray-600">{label} :</span>
-      <span className="text-gray-900">
+      <span className="text-gray-600 dark:text-gray-200">{label} :</span>
+      <span className="text-gray-900 dark:text-gray-400">
         {typeof value === "object" && !Array.isArray(value)
           ? JSON.stringify(value) // Safely render objects as a string
           : Array.isArray(value)
@@ -32,7 +28,7 @@ export const JobDetail: React.FC<JobDetailsProps> = ({ details }) => {
                 {item}
               </Badge>
             ))
-          : value || "N/A"} {/* Display "N/A" for null or undefined */}
+          : value || "N/A"} 
       </span>
     </div>
   );
@@ -59,7 +55,7 @@ export const JobDetail: React.FC<JobDetailsProps> = ({ details }) => {
 
       {/* Footer */}
       <div className="mt-4 p-4 border-t  px-6 border-gray-200">
-        <span className="text-sm text-white bg-orange-400 p-1 rounded-md ">Job ID: {details.jobId}</span>
+        <Badge variant={"orange"}>Job ID: {details.jobId}</Badge>
       </div>
     </div>
   );

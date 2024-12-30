@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FilePenLine } from "lucide-react";
 import { ApplyDataLengthParams } from "@/utils/types/job";
+import { useRouter } from "next/navigation";
 
 type JobItem = {
   id: number;
@@ -12,8 +13,9 @@ type JobItem = {
 const JobList: React.FC<{
   applyData: ApplyDataLengthParams[];
 }> = ({ applyData }) => {
+  const router=useRouter()
   return (
-    <div className="rounded-lg shadow-lg border  p-2">
+    <div className="rounded-lg shadow-md p-5 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border mb-10">
       {applyData.map((item: ApplyDataLengthParams) => (
         <div
           key={item.id}
@@ -33,7 +35,9 @@ const JobList: React.FC<{
           </div>
           <div className="flex items-center justify-between w-1/3 gap-4">
             <p className="text-gray-500 dark:text-white">{item.length}</p>
-            <button>
+            <button onClick={()=>{
+              router.push(`/dashboard/viewJob/${item.id}`)
+            }}>
               <FilePenLine className="w-5 h-5 text-gray-400 dark:text-white hover:text-gray-600 transition-colors" />
             </button>
           </div>

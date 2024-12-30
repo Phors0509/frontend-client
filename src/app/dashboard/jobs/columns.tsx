@@ -38,7 +38,7 @@ export const columns: ColumnDef<Jobs>[] = [
   },
   {
     accessorKey: "title",
-    header: "Company Name",
+    header: "Title",
     cell: ({ row }) => {
       return (
         <div

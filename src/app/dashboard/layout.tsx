@@ -17,7 +17,7 @@ const layout = ({ children }: { children: ReactNode }) => {
           </div>
         <div className="flex">
           <SideBarCom/>
-          <div className="w-full h-screen px-5 pt-16 overflow-y-auto bg-slate-50">
+          <div className="w-full h-screen px-5 pt-16 overflow-y-auto bg-slate-50 dark:bg-[#181f39]">
             <DynamicBreadcrumb />
             {children}
           </div>

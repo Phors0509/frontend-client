@@ -33,7 +33,6 @@ const JobForm: React.FC<JobFormProps> = ({ formTitle, existingData, typeOfForm =
     existingData,
     typeOfForm
   });
-
   return (
       <>
       {
@@ -42,7 +41,7 @@ const JobForm: React.FC<JobFormProps> = ({ formTitle, existingData, typeOfForm =
         ) : (
           <div className="min-h-screen">
           <form onSubmit={handleSubmit} className="w-full">
-            <div className="bg-white dark:bg-black shadow-lg rounded-lg p-6 space-y-6">
+            <div className="bg-white shadow-md rounded-lg p-6 space-y-6 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border">
               <div className="space-y-2 text-center">
                 <h2 className="text-3xl font-bold tracking-tight">{formTitle}</h2>
                 <p className="text-gray-500">Fill in the details for the job posting</p>

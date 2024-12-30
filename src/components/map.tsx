@@ -10,10 +10,14 @@ const Map: React.FC<{
 }> = ({ setFormData, existingMap }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const markerRef = useRef<google.maps.Marker | null>(null);
-  const [initialLocation, setInitialLocation] = useState<google.maps.LatLngLiteral | null>(null);
+  const [initialLocation, setInitialLocation] =
+    useState<google.maps.LatLngLiteral | null>(null);
   const [location, setLocation] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
+
+  const DEFAULT_LOCATION = { lat: 11.576244, lng: 104.923662 }; // Wat Phnom, Phnom Penh
+  console.log("wat:", DEFAULT_LOCATION);
 
   const reverseGeocode = (location: google.maps.LatLngLiteral) => {
     const geocoder = new google.maps.Geocoder();
@@ -24,13 +28,13 @@ const Map: React.FC<{
           const formattedAddress = response.results[0].formatted_address;
           const locArr = formattedAddress.split(",").slice(-2);
           const locationString = `${locArr[0].trim()}, ${locArr[1].trim()}`;
-          
+
           setFormData((prev: Jobs) => ({
             ...prev,
             location: locationString,
             address: `${location.lat},${location.lng}`,
           }));
-          
+
           setLocation(formattedAddress);
         } else {
           console.error("No address found for this location.");
@@ -46,7 +50,7 @@ const Map: React.FC<{
       const result = await navigator.permissions.query({ name: "geolocation" });
       if (result.state === "denied") {
         setErrorMessage(
-          "Geolocation access denied. Please enable location permissions."
+          "Geolocation access denied. Please enable location permissions.fswaefwa"
         );
         return false;
       }
@@ -74,7 +78,7 @@ const Map: React.FC<{
         const loader = new Loader({
           apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
           version: "quarterly",
-          libraries: ["places"]  // Add places library
+          libraries: ["places"], // Add places library
         });
 
         // Ensure Google Maps libraries are loaded
@@ -167,17 +171,16 @@ const Map: React.FC<{
       reverseGeocode(initialLocation);
     }
   };
-
   return (
     <div>
       {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
       {!isMapLoaded && <div>Loading map...</div>}
-      <div 
-        style={{ 
-          height: "400px", 
-          width: "100%", 
-          display: isMapLoaded ? 'block' : 'none' 
-        }} 
+      <div
+        style={{
+          height: "400px",
+          width: "100%",
+          display: isMapLoaded ? "block" : "none",
+        }}
         ref={mapRef}
       />
       {isMapLoaded && (
@@ -186,7 +189,10 @@ const Map: React.FC<{
             <strong>Current Address:</strong>
             <p>{location || "Fetching address..."}</p>
           </div>
-          <button onClick={resetToCurrentLocation} style={{ marginTop: "10px" }}>
+          <button
+            onClick={resetToCurrentLocation}
+            style={{ marginTop: "10px" }}
+          >
             Reset to Current Location
           </button>
         </>

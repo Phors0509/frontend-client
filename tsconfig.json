@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -22,24 +18,17 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@utils/*": [
-        "../../packages/libs/utils/*"
-      ],
-      "@types/*": [
-        "../../packages/libs/types/*"
-      ]
+      "@/*": ["./src/*"],
+      "@utils/*": ["../../packages/libs/utils/*"],
+      "@types/*": ["../../packages/libs/types/*"]
     }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-, "src/app/dashboard/profile"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    ".next/types/**/*.ts",
+    "src/app/dashboard/profile"
+  ],
+  "exclude": ["node_modules", "sst.config.ts"]
 }

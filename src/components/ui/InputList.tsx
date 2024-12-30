@@ -65,7 +65,7 @@ export function InputList({ list, onListChange, placeholder }: InputListProps) {
             onChange={(e) => setCurrentItem(e.target.value)}
             onKeyPress={handleKeyPress}
             className={cn(
-              'flex-1',
+              'flex-1 h-[40px]',
               !currentItem.trim() && 'focus-visible:ring-destructive'
             )}
           />

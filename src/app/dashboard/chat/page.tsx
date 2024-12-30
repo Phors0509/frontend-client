@@ -127,13 +127,6 @@ const ChatDashboard: React.FC = () => {
 
   const handleSendMessage = async () => {
     if (!selectedConversation || messageInput.trim() === "") return;
-    // if (
-    //   messages.length > 0 &&
-    //   messages[messages.length - 1].message === messageInput
-    // ) {
-    //   console.log("Duplicate message detected. Not sending.");
-    //   return;
-    // }
     
     const optimisticMessage: Message = {
       _id: Date.now().toString(),
@@ -152,12 +145,6 @@ const ChatDashboard: React.FC = () => {
       setMessageInput("");
       setTimeout(() => scrollToBottom("smooth"), 100);
       socket.emit("sendMessage",optimisticMessage);
-      // await axiosInstance.post(
-      //   `${process.env.NEXT_PUBLIC_API_URL}/v1/messages/send/${selectedConversation.receiver}`,
-      //   {
-      //     message: messageInput,
-      //   }
-      // );
     } catch (error) {
       console.error("Failed to send message:", error);
       setMessages((prevMessages) =>
@@ -227,9 +214,9 @@ const ChatDashboard: React.FC = () => {
 
   console.log(":::::::::::::", onlineUsers);
   return (
-    <div className="flex h-full bg-gray-200 rounded-sm max-w-screen border-1">
+    <div className="flex h-full bg-gray-200 rounded-sm max-w-screen border-1 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border">
       {/* Conversations Sidebar */}
-      <div className="h-full bg-white rounded-r-sm shadow-sm w-96 border-1">
+      <div className="h-full bg-white rounded-r-sm shadow-sm w-96 border-1 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border">
         <div className="flex items-center justify-between p-4 border-b">
           <div className="flex items-center space-x-2">
             <MessageCircle className="text-blue-600" />
@@ -241,12 +228,12 @@ const ChatDashboard: React.FC = () => {
         </div>
 
         <div className="p-3">
-          <div className="flex items-center px-3 py-2 rounded-full bg-gray-50">
+          <div className="flex items-center px-3 py-2 rounded-full bg-gray-50 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md border">
             <Search className="mr-2 text-gray-400" size={20} />
             <Input
               type="text"
               placeholder="Search conversations..."
-              className="w-full bg-transparent focus:outline-none"
+              className="w-full bg-transparent focus:outline-none dark:bg-[#1e2746]"
             />
           </div>
         </div>
@@ -265,6 +252,7 @@ const ChatDashboard: React.FC = () => {
           ))}
         </div>
       </div>
+
       {/* Chat Window */}
       <div className="flex flex-col flex-grow h-full ">
         {selectedConversation ? (
