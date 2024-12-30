@@ -3,7 +3,7 @@ import { NextResponse, NextRequest } from "next/server";
 import { authHelpers } from "./utils/helper/middlewareHelpers";
 
 export async function middleware(request: NextRequest) {
-  console.log(" ::::::::::::::::::::::::::middleware.ts: Request URL", request.url);
+  // console.log(" ::::::::::::::::::::::::::middleware.ts: Request URL", request.url);
   const { pathname } = request.nextUrl;
   const { cookies } = await import("next/headers");
   const cookieStore = cookies();
