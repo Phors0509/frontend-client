@@ -3,13 +3,11 @@ import { cn } from "@/lib/utils";
 import {
   Users,
   MessageSquare,
-  LayoutDashboard,
   ChevronDown,
   LineChart,
   UserCircle,
   UserCheck,
   Calendar,
-  Sheet,
   List,
   BriefcaseBusiness,
 } from "lucide-react";
@@ -161,7 +159,7 @@ function SidebarItem({ route, isOpen, level = 0 }: { route: Route; isOpen: boole
 export default function SideBarCom() {
   const { isOpen } = useSidebarContext();
   return (
-    <ScrollArea className={cn("pt-16 h-screen transition-all duration-300" , isOpen ? "w-80" : "w-28" )}>
+    <ScrollArea className={cn("pt-16 h-screen transition-all duration-300 dark:bg-[#1e2746]" , isOpen ? "w-80" : "w-28" )}>
       <div className={cn("space-y-4 flex flex-col h-full dark:bg-[#1e2746] text-gray-800 dark:text-white transition-all duration-300 border-r",isOpen ? "w-full" : "w-full items-center")}>
         <div className="px-3 py-2 flex-1">
           <div className="space-y-1">

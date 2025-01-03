@@ -2,7 +2,7 @@ export type Jobs = {
   _id?: string;
   company?: { _id: string };
   title?: string;
-  position?: string[];
+  position?: string;
   workMode?: string[];
   requirement?: string;
   location?: string;
@@ -18,5 +18,5 @@ export type Jobs = {
   deadline?: string;
   createdAt?: string;
   updatedAt?: string;
-  
+
 };

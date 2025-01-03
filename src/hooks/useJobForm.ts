@@ -19,7 +19,7 @@ interface UseJobFormProps {
 const initializeFormData = (existingData?: Jobs): Jobs => {
   return {
     title: existingData?.title || "",
-    position: existingData?.position || [],
+    position: existingData?.position || "",
     workMode: existingData?.workMode || [],
     location: existingData?.location || "",
     requirement: existingData?.requirement || "",
