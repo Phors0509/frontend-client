@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import { Calendar, momentLocalizer, View } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment-timezone";
@@ -67,6 +68,12 @@ const CustomToolbar = ({ date, view, onNavigate, onView }: any) => {
         >
           Day
         </Button>
+        <Button
+          onClick={() => handleViewChange("agenda")}
+          className={`hover:bg-orange-300 hover:text-white ${view === "agenda" ? "bg-orange-400 text-white" : ""}`}
+        >
+          Agenda
+        </Button>
       </div>
     </div>
   );
@@ -92,33 +99,102 @@ const InterviewCalendar = () => {
         );
 
         const applications: JobApplication[] = response.data.data.map(
-          (application: JobApplication) => ({
-            _id: application._id,
-            status: application.userInfo?.status,
-            title: application.userInfo?.name,
-            jobType: application.jobInfo?.position,
-            interviewLocation: application.companyResponse?.interviewLocation,
-            interviewDate: application.companyResponse?.interviewDate
-              ? new Date(application.companyResponse.interviewDate)
-              : undefined,
-          })
+          (application: JobApplication) => {
+            // Convert the interviewDate to Cambodia time
+            const interviewDateInCambodia = application.companyResponse
+              ?.interviewDate
+              ? moment(application.companyResponse?.interviewDate)
+              .tz(
+                  "Asia/Phnom_Penh"
+                )
+              : undefined;
+            return {
+              _id: application._id,
+              status: application.userInfo?.status,
+              title: application.userInfo?.name,
+              jobType: application.jobInfo?.position,
+              interviewLocation: application.companyResponse?.interviewLocation,
+              interviewTime: interviewDateInCambodia?.format("h:mm A"),
+              start: application.companyResponse?.interviewDate
+                ? new Date(
+                    application.companyResponse.interviewDate
+                  ).toISOString() // Convert Date to ISO string
+                : undefined,
+              end: application.companyResponse?.interviewDate
+                ? new Date(
+                    application.companyResponse.interviewDate
+                  ).toISOString() // Convert Date to ISO string
+                : undefined,
+              interviewDate: application.companyResponse?.interviewDate
+                ? new Date(
+                    application.companyResponse.interviewDate
+                  ).toISOString() // Convert Date to ISO string
+                : undefined,
+              // Add more transformations or mappings here
+            };
+          }
         );
+        // Function to generate the label for a given day relative to the current date
+        const getDayLabel = (date: Date): string => {
+          const currentDate = new Date();
+          // Normalize times to ignore time differences and focus on dates
+          currentDate.setHours(0, 0, 0, 0);
+          date.setHours(0, 0, 0, 0);
 
-        const events: InterviewEvent[] = applications.map((apply: any) => ({
-          _id: apply._id || "",
-          title: apply.title,
-          start: apply.interviewDate || new Date(),
-          end: apply.interviewDate || new Date(),
-          candidateName: apply.candidateName,
-          jobType: apply.jobType,
-          interviewLocation: apply.interviewLocation,
-          status: apply.status,
-        }));
+          const diffTime = date.getTime() - currentDate.getTime(); // Time difference in milliseconds
+          const diffDays = Math.round(diffTime / (1000 * 3600 * 24)); // Convert time difference to days
 
+          if (diffDays === 0) {
+            return "Today";
+          } else if (diffDays === 1) {
+            return "Tomorrow";
+          } else if (diffDays === -1) {
+            return "Yesterday";
+          } else if (diffDays > 0) {
+            return `${diffDays} days from today`; // Future dates
+          } else {
+            return `${Math.abs(diffDays)} days ago`; // Past dates
+          }
+        };
+
+        const convertToCambodiaISO = (utcTime: string): string => {
+          const utcDate = new Date(utcTime);
+        
+          // Convert to Cambodia timezone (UTC+7)
+          const cambodiaTime = new Date(utcDate.getTime() + 7 * 60 * 60 * 1000);
+        
+          // Return the time in ISO format without milliseconds and 'Z'
+          return cambodiaTime.toISOString().split(".")[0]; // Removes milliseconds and 'Z'
+        };
+        // Example: Creating event objects with dynamic day labels
+        const events: InterviewEvent[] = applications.map((apply: any) => {
+          const interviewDate = apply.interviewDate
+            ? new Date(apply.interviewDate)
+            : new Date();
+
+            //covert time in cambo
+          const utcTime = apply.start;
+          const cambodiaTimeISO = convertToCambodiaISO(utcTime);
+          
+          const dayLabel = getDayLabel(interviewDate);
+          return {
+            _id: apply._id || "",
+            title: `${apply.title} - ${getDayLabel(interviewDate)}`,
+            start: new Date(cambodiaTimeISO),
+            end:new Date(cambodiaTimeISO),
+            jobType: apply.jobType,
+            interviewDate: apply.interviewDate,
+            interviewLocation: apply.interviewLocation,
+            interviewTime: apply.interviewTime,
+            status: apply.status,
+            dayLabel: getDayLabel(interviewDate),
+          };
+        });
         setEvents(events);
       } catch (error) {
         console.error("Error fetching interviews:", error);
       }
+      
     };
 
     fetchInterviews();

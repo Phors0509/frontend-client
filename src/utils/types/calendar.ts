@@ -1,4 +1,4 @@
-export interface JobApplication {
+export interface JobApplicate {
   _id?: string; // Unique identifier for the application
   candidateName: string; // Name of the candidate
   jobTitle: string; // Title of the job being applied for
@@ -14,6 +14,7 @@ export interface InterviewEvent {
   jobType?: string;
   interviewDate?: Date;
   interviewLocation?: string;
+  interviewTime?: string;  // Add this field for the interview time
   status?: string;
 }
 

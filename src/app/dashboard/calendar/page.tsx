@@ -1,16 +1,23 @@
 "use client";
 import { CalendarSkeleton } from "@/components/calendar/CalendarSkeleton";
 import InterviewCalendar from "@/components/calendar/InterviewCalendar";
-import { useAuth } from "@/context/AuthContext";
+import { useEffect, useState } from "react";
 
 const CalendarPage = () => {
-  const {isLoading} =useAuth()
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); 
+    return () => clearTimeout(timer);
+  }, []);
 
   if (isLoading) {
     return <CalendarSkeleton />;
+  } else {
+    return <InterviewCalendar />;
   }
-
-  return <div>{<InterviewCalendar />}</div>;
 };
 
 export default CalendarPage;

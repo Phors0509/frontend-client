@@ -16,6 +16,13 @@ interface EventModalProps {
 }
 
 export const EventModal = ({ event, onClose }: EventModalProps) => {
+  const formattedInterviewDate = event.interviewDate
+  ? new Date(event.interviewDate).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    }) // Display the date in a specific format
+  : "No Interview Date";
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full">
@@ -68,9 +75,7 @@ export const EventModal = ({ event, onClose }: EventModalProps) => {
                 Date
               </label>
               <p className="text-gray-900 text-[14px] dark:text-gray-100">
-                {event.interviewDate
-                  ? event.interviewDate.toDateString()
-                  : "Interview date not set"}
+              {formattedInterviewDate}
               </p>
             </div>
           </div>
@@ -92,7 +97,7 @@ export const EventModal = ({ event, onClose }: EventModalProps) => {
             </div>
 
             {/* Interview Time */}
-            <div className="flex items-start gap-x-2">
+            <div className="flex  gap-x-2">
               <div className="p-1">
                 <Clock4 className="h-[20px]" />
               </div>
@@ -100,10 +105,8 @@ export const EventModal = ({ event, onClose }: EventModalProps) => {
                 <label className="block text-[16px] font-medium dark:text-gray-200">
                   Interview Time
                 </label>
-                <p className="text-gray-900 flex gap-1 items-center text-[14px] dark:text-gray-100">
-                  {event.start && event.end
-                    ? `${formatEventTime(event.start)} - ${formatEventTime(event.end)}`
-                    : "Time not available"}
+                <p className="text-gray-900  text-center text-[14px] dark:text-gray-100">
+                  {event.interviewTime || "Time not set"}
                 </p>
               </div>
             </div>

@@ -142,64 +142,73 @@ const Chart = () => {
     user?._id && fetchLength();
     //eslint-disable-next-line
   }, [user?._id]);
-
-  if (isLoading) return <DashboardSkeleton />;
-  
   return (
     <>
-        <div className="w-full space-y-5">
-
-        <div className="grid grid-cols-5 gap-4">
-          <div className="col-span-1">
-          <Card className="flex flex-col bg-blue-200 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md rounded-[5px] p-5">
-            <User className="w-[23px] h-[23px] text-blue-400" />
-            <div>
-              <div className="text-[13px] text-gray-500 font-bold">Apply</div>
-              <span className="text-[21px] font-bold dark:text-gray-100">
-                {length.applicant}
-              </span>
-            </div>
-          </Card>
-          </div>
-          <div className="col-span-1">
-          <Card className="flex flex-col bg-orange-100 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md rounded-[5px] p-5">
-            <RiMailVolumeLine className="w-[23px] h-[23px] text-blue-400" />
-            <span className="text-[21px] font-bold">
-              {length.interview}
-            </span>
-            <div className="text-[13px] text-gray-500">Interview</div>
-          </Card>
-          </div>
-          <div className="col-span-1">
-          <Card className="flex flex-col bg-pink-100 dark:bg-[#1e2746] dark:border-gray-700 dark:shadow-md rounded-[5px] p-5">
-            <RiPassValidLine className="w-[23px] h-[23px] text-blue-400" />
-            <span className="text-[21px] font-bold">{length.pass}</span>
-            <div className="text-[13px] text-gray-500">Passed</div>
-          </Card>
-          </div>
-          <Card className="relative flex items-center bg-blue-500 p-5 rounded-lg overflow-hidden col-span-2 dark:border-gray-700 dark:shadow-md w-full">
-            <div className="text-white">
-              <h2 className="text-[16px] font-bold">Most <br /> Applied Job</h2>
-              <p className="mt-2 text-[12px]">{applyData[0].title}</p>
-            </div>
-            <div className="bg-[rgba(255,174,22,1)] absolute right-0 w-[calc(50%-10px)] h-full" style={{ clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 30% 100%, 0% 50%)" }} />
-          </Card>
-        </div>
-
-        <div className="w-full grid grid-cols-5 gap-4">
-            <div className="col-span-3">
-                <ChartComponent applyMonthly={applyMonthly} colors={colors} />
-            </div>
-            <div className="col-span-2">
-                <PieChartComponent applyData={applyData} />
-            </div>
-        </div>
-          <div className="w-full flex flex-col gap-[32px] ">
+      {isLoading ? (
+        <DashboardSkeleton />
+      ) : (
+        <div className="flex w-full float-right gap-6 mt-[31px] ">
+          <div className="w-2/3">
+            <div className="flex flex-col w-full float-right h-auto gap-[32px]">
+              {/*cover three of card */}
+              <div className="flex w-full h-[130px] 2xl:h-[180px] gap-[20px] ">
+                <Card className="w-1/3 flex flex-col rounded-[5px] bg-green-200 justify-center dark:text-black p-[10px]">
+                  <User className="w-[23px] h-[23px] text-blue-400" />
+                  <span className="text-[21px] font-bold">
+                    {length.applicant}
+                  </span>
+                  <div className="text-[13px] text-gray-500">Apply</div>
+                </Card>
+                <Card className="w-1/3 flex flex-col rounded-[5px] bg-orange-100 justify-center dark:text-black p-[10px]">
+                  <RiMailVolumeLine className="w-[23px] h-[23px] text-blue-400" />
+                  <span className="text-[21px] font-bold">
+                    {length.interview}
+                  </span>
+                  <div className="text-[13px] text-gray-500">interview</div>
+                </Card>
+                <Card className="w-1/3 flex flex-col rounded-[5px] bg-pink-100 justify-center dark:text-black p-[10px]">
+                  <RiPassValidLine className="w-[23px] h-[23px] text-blue-400" />
+                  <span className="text-[21px] font-bold">{length.pass}</span>
+                  <div className="text-[13px] text-gray-500">Passed</div>
+                </Card>
+              </div>
+              <div className="w-full flex flex-col gap-[32px] ">
+                <div className="w-full">
+                  <ChartComponent applyMonthly={applyMonthly} colors={colors} />
+                </div>
                 <div className="w-full ">
                   <JobList applyData={applyData} />
                 </div>
               </div>
+            </div>
           </div>
+          {/* cover chart  and pieChart*/}
+          <div className="flex flex-col w-1/3 gap-[32px]">
+            <div className="w-full">
+              <Card className="flex relative h-[130px] items-center bg-blue-500 px-[17px] rounded-lg overflow-hidden w-full max-w-xl">
+                <div className="text-white">
+                  <h2 className="text-[16px] font-bold">
+                    Most <br /> Applied Job
+                  </h2>
+                  <p className="mt-2 text-[12px ]">
+                    {applyData[0] ? applyData[0].title : "Default"}
+                  </p>
+                </div>
+                <div
+                  className="bg-[rgba(255,174,22,1)] w-[calc(50%-10px)] h-full absolute right-0"
+                  style={{
+                    clipPath:
+                      "polygon(30% 0%, 100% 0%, 100% 100%, 30% 100%, 0% 50%)",
+                  }}
+                ></div>
+              </Card>
+            </div>
+            <div className="">
+              <PieChartComponent applyData={applyData} />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

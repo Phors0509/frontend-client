@@ -36,7 +36,8 @@ export function SignUpForm() {
       await signUp(data);
       setIsLoading(false);
     } catch (error: any) {
-      setError(error.message || "Something went wrong");
+      setError(error.response.data.message || "Something went wrong");
+      setIsLoading(false);
     }
   }
 

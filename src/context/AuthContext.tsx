@@ -92,7 +92,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signIn = async (data: SignInData) => {
-    setIsLoading(true);
+    // setIsLoading(true);
     try {
       await axiosInstance.post(API_ENDPOINTS.CORPARATE_SIGNIN, {
         email: data.email,
@@ -103,11 +103,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setIsAuthenticated(true);
       router.push("/dashboard/chart");
     } catch (error) {
-      console.error("Sign in failed:", error);
+      console.log("Sign in failed:", error);
       setIsAuthenticated(false);
-      throw error;
-    } finally {
+      setUser(null);
       setIsLoading(false);
+      throw error;
     }
   };
 

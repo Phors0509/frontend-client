@@ -14,7 +14,7 @@ type SignInFormValues = z.infer<typeof signInSchema>;
 export function SignInForm() {
   const { signIn } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-
+  const [error, setError] = useState<string>("");
   const form = useForm<SignInFormValues>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -29,15 +29,17 @@ export function SignInForm() {
       await signIn(data);
       setIsLoading(false);
     } catch (error: any) {
+      setError(error.response.data.message);
       form.setError("root", {
         message: error.response.data.message || "Invalid credentials",
       });
+      setIsLoading(false);
     }
   }
 
   return (
     <FormWrapper title="Sign In" description="Enter your email and password to sign in to your account">
-      <SignInFormFields form={form} onSubmit={onSubmit} isLoading={isLoading} />
+      <SignInFormFields form={form} onSubmit={onSubmit} isLoading={isLoading} error={error}/>
     </FormWrapper>
   );
 }

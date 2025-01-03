@@ -21,7 +21,7 @@ export function SignInFormFields({ form, onSubmit, isLoading, error }: FormField
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField isLoading={isLoading} form={form} name="email" label="Email" placeholder="name@example.com" type="email" />
+        <FormField isLoading={isLoading} form={form} name="email" label="Email" placeholder="name@example.com" type="email"  />
         <PasswordInput form={form} isCf={false} />
         {error && ( <div className="text-red-500 text-sm mt-2">{error}</div> )}
         <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600 text-white" disabled={isLoading} >

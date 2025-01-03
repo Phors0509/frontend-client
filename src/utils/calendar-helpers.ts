@@ -1,12 +1,12 @@
 import moment from 'moment-timezone';
-import { InterviewEvent, JobApplication } from './types/calendar';
+import { InterviewEvent, JobApplicate } from './types/calendar';
 
-export const convertToEvents = (applications: JobApplication[]): InterviewEvent[] => {
+export const convertToEvents = (applications: JobApplicate[]): InterviewEvent[] => {
   return applications
     .filter(app => app.interviewDate && app.status === 'interview') // Only process applications with interview dates
     .map(app => {
       const startDateTime = moment.tz(
-        `${app.interviewDate} ${app.interviewTime || '09:00'}`,
+        `${app.interviewDate} ${app.interviewTime || ''}`,
         'YYYY-MM-DD HH:mm',
         'Asia/Phnom_Penh'
       );
@@ -22,6 +22,7 @@ export const convertToEvents = (applications: JobApplication[]): InterviewEvent[
         candidateName: app.candidateName,
         jobTitle: app.jobTitle,
         status: app.status,
+        interviewTime: app.interviewTime ? moment.tz(app.interviewTime, 'Asia/Phnom_Penh').format('HH:mm A') : undefined,
       };
     });
 };

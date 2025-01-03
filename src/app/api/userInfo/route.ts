@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request) {
   try {
     const response = await fetch(
-      `${API_ENDPOINTS.USER_PROFILE}`,
+      `${API_ENDPOINTS.USER_PROFILE}/me`,
       {
         method: "GET",
         credentials: "include",
