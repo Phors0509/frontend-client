@@ -1,13 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-import { Eye, SquarePen, Trash } from "lucide-react";
+import { Eye, SquarePen } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import axiosInstance from "@/utils/axios";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Jobs } from "@/utils/types/form-type";
-import { API_ENDPOINTS } from "@/utils/const/api-endpoints";
 import { useJob } from "@/context/JobContext";
 import JobDelete from "@/components/jobDelete";
 
@@ -54,7 +51,7 @@ export const columns: ColumnDef<Jobs>[] = [
     accessorKey: "position",
     header: "Position",
     cell: ({ row }) => {
-      const positions = row.original.position;
+      const positions = Array.isArray(row.original.position) ? row.original.position : [];
       return (
         <>
           <div
