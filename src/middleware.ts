@@ -12,6 +12,18 @@ export async function middleware(request: NextRequest) {
   const refresh_token = allCookies.split("; ").find((cookie) => cookie.startsWith("refresh_token="))?.split("=")[1];
   const username = allCookies.split("; ").find((cookie) => cookie.startsWith("username="))?.split("=")[1];
 
+
+  console.log("middleware.ts: access_token::::::::::::::::::::::::::::::", access_token);
+  console.log("============================================================");
+  console.log("middleware.ts: refresh_token:::::::::::::::::::::::::::::", refresh_token);
+  console.log("============================================================");
+  console.log("middleware.ts: username::::::::::::::::::::::::::::::::::", username);
+  console.log("============================================================");
+  console.log("middleware.ts: allCookies :::::::::::::::::::::::::::::::", allCookies);
+  console.log("============================================================");
+  console.log("middleware.ts: pathname::::::::::::::::::::::::::::::::::", pathname);
+  console.log("============================================================");
+
   // let userInfoResponse, userInfo;
   // if (access_token) {
   //   userInfoResponse = await fetch(new URL("/api/userInfo", request.url), {
