@@ -190,14 +190,14 @@ const ProfileLocationMap: React.FC<ProfileLocationMapProps> = ({
       {isMapLoaded && (
         <>
           <div style={{ marginTop: "10px" }}>
-            <strong>Current Address:</strong>
+            <strong>Current Address:u</strong>
             <p>{locationDetails || "Fetching address..."}</p>
           </div>
           <button
             onClick={resetToCurrentLocation}
             className="mt-2 px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
           >
-            Reset to Current Location
+            Reset to Current Locationb
           </button>
         </>
       )}

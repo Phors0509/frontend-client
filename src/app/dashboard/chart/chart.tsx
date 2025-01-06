@@ -185,7 +185,7 @@ const Chart = () => {
           {/* cover chart  and pieChart*/}
           <div className="flex flex-col w-1/3 gap-[32px]">
             <div className="w-full">
-              <Card className="flex relative h-[130px] items-center bg-blue-500 px-[17px] rounded-lg overflow-hidden w-full max-w-xl">
+              <Card className="flex relative h-[130px] 2xl:h-[180px] items-center bg-blue-500 px-[17px] rounded-lg overflow-hidden w-full ">
                 <div className="text-white">
                   <h2 className="text-[16px] font-bold">
                     Most <br /> Applied Job

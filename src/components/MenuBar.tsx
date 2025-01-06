@@ -69,14 +69,13 @@ export const MenuBar = () => {
           <DropdownMenu>
           <DropdownMenuTrigger>
           <Avatar>
-            <AvatarImage src={user?.profile } className="w-15 h-15" />
+            <AvatarImage src={user?.profile } className="w-15 h-15 object-cover" />
             <AvatarFallback>{user?.name || ""}</AvatarFallback>
           </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => router.push("/profile")}>Profile</DropdownMenuItem>
             <DropdownMenuItem onClick={signOut}>Sign Out</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

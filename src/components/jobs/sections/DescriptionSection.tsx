@@ -28,6 +28,7 @@ const DescriptionSection: React.FC<DescriptionSectionProps> = ({
           list={formData.required_experience || []}
           onListChange={handleRequiredExperienceChange}
           placeholder="Add required experience"
+          
         />
           {errors.required_experience && (
             <p className="text-sm text-red-500">{errors.required_experience}</p>

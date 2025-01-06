@@ -32,7 +32,7 @@ const DateSection: React.FC<DateSectionProps> = ({
             <Button
               variant="none"
               className={cn(
-                "w-full justify-start text-left font-normal ",
+                "w-full justify-start text-left dark:bg-gray-900 font-normal ",
                 !createdAtDate && "text-muted-foreground"
               )}
             >
@@ -64,7 +64,7 @@ const DateSection: React.FC<DateSectionProps> = ({
             <Button
               variant="none"
               className={cn(
-                "w-full justify-start text-left font-normal",
+                "w-full justify-start text-left dark:bg-gray-900 font-normal",
                 !deadlineDate && "text-muted-foreground"
               )}
             >

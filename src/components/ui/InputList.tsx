@@ -45,7 +45,7 @@ export function InputList({ list, onListChange, placeholder }: InputListProps) {
             <Textarea
               value={item}
               onChange={(e) => handleUpdateItem(index, e.target.value)}
-              className="flex-1 h-1"
+              className="flex-1 h-1 "
             />
             <Button
               variant="ghost"

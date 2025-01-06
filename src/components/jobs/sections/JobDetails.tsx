@@ -34,7 +34,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({
             defaultValue={formData.type || []}
             placeholder="Select job type"
             variant="inverted"
-            className="bg-gray-100 dark:bg-gray-800"
+            className="bg-gray-100 dark:bg-gray-900"
           />
           {errors.type && <p className="text-sm text-red-500">{errors.type}</p>}
         </div>
@@ -49,7 +49,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({
             defaultValue={formData.schedule || []}
             placeholder="Select schedule"
             variant="inverted"
-            className="bg-gray-100 dark:bg-gray-800"
+            className="bg-gray-100 dark:bg-gray-900"
           />
           {errors.schedule && (
             <p className="text-sm text-red-500">{errors.schedule}</p>
@@ -67,7 +67,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({
             defaultValue={formData.workMode || []}
             placeholder="Select work mode"
             variant="inverted"
-            className="bg-gray-100 dark:bg-gray-800"
+            className="bg-gray-100 dark:bg-gray-900"
           />
           {errors.workMode && (
             <p className="text-sm text-red-500">{errors.workMode}</p>
