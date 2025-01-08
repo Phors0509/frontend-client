@@ -15,7 +15,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Force trailing slash to prevent redirect loops
   trailingSlash: true,
   async headers() {
     return [

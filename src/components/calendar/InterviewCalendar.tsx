@@ -2,8 +2,8 @@
 
 import { Calendar, momentLocalizer, View } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import moment from "moment-timezone";
 import { useEffect, useState } from "react";
+import moment from "moment-timezone";
 import { API_ENDPOINTS } from "@/utils/const/api-endpoints";
 import { useAuth } from "@/context/AuthContext";
 import axiosInstance from "@/utils/axios";
@@ -92,19 +92,17 @@ const InterviewCalendar = () => {
   useEffect(() => {
     const fetchInterviews = async () => {
       if (!user?._id) return;
-
+      console.log("user id:", user._id);
       try {
         const response = await axiosInstance.get(
           `${API_ENDPOINTS.JOB_APPLY}?companyId=${user._id}&filter=Interview`
         );
-
         const applications: JobApplication[] = response.data.data.map(
           (application: JobApplication) => {
             // Convert the interviewDate to Cambodia time
             const interviewDateInCambodia = application.companyResponse
               ?.interviewDate
-              ? moment(application.companyResponse?.interviewDate)
-              .tz(
+              ? moment(application.companyResponse?.interviewDate).tz(
                   "Asia/Phnom_Penh"
                 )
               : undefined;
@@ -159,10 +157,10 @@ const InterviewCalendar = () => {
 
         const convertToCambodiaISO = (utcTime: string): string => {
           const utcDate = new Date(utcTime);
-        
+
           // Convert to Cambodia timezone (UTC+7)
           const cambodiaTime = new Date(utcDate.getTime() + 7 * 60 * 60 * 1000);
-        
+
           // Return the time in ISO format without milliseconds and 'Z'
           return cambodiaTime.toISOString().split(".")[0]; // Removes milliseconds and 'Z'
         };
@@ -172,16 +170,16 @@ const InterviewCalendar = () => {
             ? new Date(apply.interviewDate)
             : new Date();
 
-            //covert time in cambo
+          //covert time in cambo
           const utcTime = apply.start;
           const cambodiaTimeISO = convertToCambodiaISO(utcTime);
-          
+
           const dayLabel = getDayLabel(interviewDate);
           return {
             _id: apply._id || "",
             title: `${apply.title} - ${getDayLabel(interviewDate)}`,
             start: new Date(cambodiaTimeISO),
-            end:new Date(cambodiaTimeISO),
+            end: new Date(cambodiaTimeISO),
             jobType: apply.jobType,
             interviewDate: apply.interviewDate,
             interviewLocation: apply.interviewLocation,
@@ -194,7 +192,6 @@ const InterviewCalendar = () => {
       } catch (error) {
         console.error("Error fetching interviews:", error);
       }
-      
     };
 
     fetchInterviews();
@@ -219,10 +216,8 @@ const InterviewCalendar = () => {
         onNavigate={(newDate) => setDate(newDate)}
         eventPropGetter={eventStyleGetter}
         onSelectEvent={handleSelectEvent}
-        components={{
-          toolbar: CustomToolbar,
-        }}
         className="rounded-lg shadow-lg dark:text-white"
+        components={{ toolbar: CustomToolbar }}
       />
 
       {showModal && selectedEvent && (

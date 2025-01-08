@@ -129,7 +129,7 @@ function SidebarItem({ route, isOpen, level = 0 }: { route: Route; isOpen: boole
                 key={subRoute.href}
                 href={normalizeHref(subRoute.href)}
                 className={cn("flex p-3 pl-12 w-full justify-start items-center text-sm font-medium cursor-pointer hover:text-white hover:bg-orange-400 rounded-lg transition",pathname === normalizeHref(subRoute.href)? "text-[#FF7300]": "text-muted-foreground")}>
-                <subRoute.icon className="h-6 w-6 mr-3" />
+                <subRoute.icon className="w-6 h-6 mr-3" />
                 {subRoute.label}
               </Link>
             ))}
@@ -157,11 +157,11 @@ function SidebarItem({ route, isOpen, level = 0 }: { route: Route; isOpen: boole
 }
 
 export default function SideBarCom() {
-  const { isOpen } = useSidebarContext();
+  const { isOpen,toggleSidebar } = useSidebarContext();
   return (
-    <ScrollArea className={cn("pt-16 h-screen transition-all duration-300 dark:bg-[#1e2746]" , isOpen ? "w-80" : "w-28" )}>
+    <ScrollArea className={cn("pt-16 h-screen transition-all duration-300 dark:bg-[#1e2746]" , isOpen ? "w-80" : "w-28" )} onMouseEnter={toggleSidebar} onMouseLeave={toggleSidebar}>
       <div className={cn("space-y-4 flex flex-col h-full dark:bg-[#1e2746] text-gray-800 dark:text-white transition-all duration-300 border-r",isOpen ? "w-full" : "w-full items-center")}>
-        <div className="px-3 py-2 flex-1">
+        <div className="flex-1 px-3 py-2">
           <div className="space-y-1">
             {routes.map((route) => (
               <SidebarItem key={route.label} route={route} isOpen={isOpen} />
