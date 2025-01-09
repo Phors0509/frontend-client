@@ -39,24 +39,3 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: ["/signin", "/", "/dashboard/:path*",],
 };
-
-// export function middleware(request: NextRequest) {
-//   const access_token = request.cookies.get("access_token")?.value;
-//   const refresh_token = request.cookies.get("refresh_token")?.value;
-//   const username = request.cookies.get("username")?.value;
-
-//   // if (!access_token && refresh_token && username) {
-//   //   // Attempt refresh logic or clear auth
-//   //   return NextResponse.redirect(new URL("/signin", request.url));
-//   // }
-
-//   // if (!access_token && request.nextUrl.pathname.startsWith("/dashboard")) {
-//   //   return NextResponse.redirect(new URL("/signin", request.url));
-//   // }
-
-//   return NextResponse.next();
-// }
-
-// export const config = {
-//   matcher: ["/signin", "/", "/dashboard/:path*"],
-// };
