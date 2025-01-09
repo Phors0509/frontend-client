@@ -17,9 +17,6 @@ export default $config({
           defaultBehavior: {
             viewerProtocolPolicy: "redirect-to-https",
             allowedMethods: ["GET", "HEAD", "OPTIONS"],
-            cachePolicy: sst.aws.cloudfront.CachePolicy.fromCachePolicyId(
-              "CacheDisabled"
-            ),
             originRequestPolicy: sst.aws.cloudfront.OriginRequestPolicy.ALL_VIEWER,
             cookies: { forward: "all" }, // Forward all cookies
             headers: { forward: "all" }, // Forward headers if necessary
