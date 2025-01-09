@@ -15,10 +15,7 @@ export default $config({
       cdk: {
         distribution: {
           defaultBehavior: {
-            viewerProtocolPolicy: "redirect-to-https",
-            allowedMethods: sst.aws.cloudfront.AllowedMethods.ALLOW_ALL,
-            cachePolicy: sst.aws.cloudfront.CachePolicy.CACHING_DISABLED, // Disable caching
-            originRequestPolicy: sst.aws.cloudfront.OriginRequestPolicy.ALL_VIEWER, // Use built-in constant
+            viewerProtocolPolicy: "http-to-https",
           },
         },
       },
