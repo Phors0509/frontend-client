@@ -10,40 +10,25 @@ export default $config({
     };
   },
   async run() {
-    const site = new sst.aws.Nextjs("frontend-client-dashboard", {
-      server: {
-        edge: {
-          viewerRequest: {
-            injection: `
-              const cookies = event.request.headers.cookie || [];
-              // Access specific cookies
-              const myCookie = cookies.find(cookie => cookie.startsWith('myCookieName='));
-              if (myCookie) {
-                // Do something with the cookie
-                event.request.headers['x-my-cookie'] = myCookie.split('=')[1];
-              }
-            `
-          },
-          viewerResponse: {
-            injection: `
-              // Modify response headers or cookies here
-            `
-          }
-        }
-      },
+    const site = new sst.NextjsSite(this, "frontend-client-dashboard", {
+      customDomain: "https://d9xtr9j58bdbz.cloudfront.net/", // Replace with your domain
       cdk: {
         distribution: {
           defaultBehavior: {
             viewerProtocolPolicy: "redirect-to-https",
             allowedMethods: ["GET", "HEAD", "OPTIONS"],
-            cachedMethods: ["GET", "HEAD"],
-            cachePolicy: {
-              cachePolicyId: "CACHING_DISABLED",
-            },
+            cachePolicy: sst.aws.cloudfront.CachePolicy.fromCachePolicyId(
+              "CacheDisabled"
+            ),
+            originRequestPolicy: sst.aws.cloudfront.OriginRequestPolicy.ALL_VIEWER,
+            cookies: { forward: "all" }, // Forward all cookies
+            headers: { forward: "all" }, // Forward headers if necessary
           },
         },
       },
     });
-    return site;
+    this.addOutputs({
+      URL: site.url,
+    });
   },
 });
