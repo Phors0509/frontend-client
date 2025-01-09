@@ -10,18 +10,40 @@ export default $config({
     };
   },
   async run() {
-    const site = new sst.NextjsSite(this, "frontend-client-dashboard", {
-      customDomain: "https://d9xtr9j58bdbz.cloudfront.net/", // Replace with your domain
+    const site = new sst.aws.Nextjs("frontend-client-dashboard", {
+      server: {
+        edge: {
+          viewerRequest: {
+            injection: `
+              const cookies = event.request.headers.cookie || [];
+              // Access specific cookies
+              const myCookie = cookies.find(cookie => cookie.startsWith('myCookieName='));
+              if (myCookie) {
+                // Do something with the cookie
+                event.request.headers['x-my-cookie'] = myCookie.split('=')[1];
+              }
+            `
+          },
+          viewerResponse: {
+            injection: `
+              // Modify response headers or cookies here
+            `
+          }
+        }
+      },
       cdk: {
         distribution: {
           defaultBehavior: {
-            viewerProtocolPolicy: "http-to-https",
+            viewerProtocolPolicy: "redirect-to-https",
+            allowedMethods: ["GET", "HEAD", "OPTIONS"],
+            cachedMethods: ["GET", "HEAD"],
+            cachePolicy: {
+              cachePolicyId: "CACHING_DISABLED",
+            },
           },
         },
       },
     });
-    this.addOutputs({
-      URL: site.url,
-    });
+    return site;
   },
 });
