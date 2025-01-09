@@ -16,10 +16,9 @@ export default $config({
         distribution: {
           defaultBehavior: {
             viewerProtocolPolicy: "redirect-to-https",
-            allowedMethods: ["GET", "HEAD", "OPTIONS"],
-            originRequestPolicy: sst.aws.cloudfront.OriginRequestPolicy.ALL_VIEWER,
-            cookies: { forward: "all" }, // Forward all cookies
-            headers: { forward: "all" }, // Forward headers if necessary
+            allowedMethods: sst.aws.cloudfront.AllowedMethods.ALLOW_ALL,
+            cachePolicy: sst.aws.cloudfront.CachePolicy.CACHING_DISABLED, // Disable caching
+            originRequestPolicy: sst.aws.cloudfront.OriginRequestPolicy.ALL_VIEWER, // Use built-in constant
           },
         },
       },
