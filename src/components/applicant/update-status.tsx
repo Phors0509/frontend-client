@@ -19,7 +19,6 @@ import { Calendar } from "@/components/ui/calendar";
 import { CalendarIcon, PencilIcon, SquarePen } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import { toZonedTime } from "date-fns-tz";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import axiosInstance from "@/utils/axios";
 import { API_ENDPOINTS } from "@/utils/const/api-endpoints";
@@ -55,23 +54,15 @@ export function UpdateStatus({
         interviewDate?.setHours(hours);
         interviewDate?.setMinutes(minutes);
       }
-      const utcStartDate = startDate
-        ? toZonedTime(startDate, "Asia/Bangkok")
-        : undefined;
-      const utcInterviewDate = interviewDate
-        ? toZonedTime(interviewDate, "Asia/Bangkok")
-        : undefined;
-      alert(`interviewDate::::${interviewDate}`);
-      alert(`utcInterviewDate update:::${utcInterviewDate}`);
       const response = await axiosInstance.put(
         `${API_ENDPOINTS.JOB_STATUS}/${applyId}`,
         {
           status: status,
-          startDate: utcStartDate
-            ? format(utcStartDate, "yyyy-MM-dd'T'HH:mm:ssXXX")
+          startDate: startDate
+            ? format(startDate, "yyyy-MM-dd'T'HH:mm:ssXXX")
             : undefined,
-          interviewDate: utcInterviewDate
-            ? format(utcInterviewDate, "yyyy-MM-dd'T'HH:mm:ssXXX")
+          interviewDate: interviewDate
+            ? format(interviewDate, "yyyy-MM-dd'T'HH:mm:ssXXX")
             : undefined,
           interviewLocation,
         }
