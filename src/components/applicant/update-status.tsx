@@ -19,7 +19,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { CalendarIcon, PencilIcon, SquarePen } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import { fromZonedTime } from "date-fns-tz";
+import { toZonedTime } from "date-fns-tz";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import axiosInstance from "@/utils/axios";
 import { API_ENDPOINTS } from "@/utils/const/api-endpoints";
@@ -56,10 +56,10 @@ export function UpdateStatus({
         interviewDate?.setMinutes(minutes);
       }
       const utcStartDate = startDate
-        ? fromZonedTime(startDate, "Asia/Bangkok")
+        ? toZonedTime(startDate, "Asia/Bangkok")
         : undefined;
       const utcInterviewDate = interviewDate
-        ? fromZonedTime(interviewDate, "Asia/Bangkok")
+        ? toZonedTime(interviewDate, "Asia/Bangkok")
         : undefined;
       console.log("interviewDate::::", interviewDate);
       console.log("utcInterviewDate::::", utcInterviewDate);
