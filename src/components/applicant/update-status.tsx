@@ -46,12 +46,14 @@ export function UpdateStatus({
   const handleSubmit = async () => {
     try {
       const [hours, minutes] = (time ?? "00:00").split(":").map(Number);
+      const offset = new Date().getTimezoneOffset() / 60; // Get offset in hours
+      const adjustedHours = hours - offset;
       if (startDate) {
         console.log("inside startDate");
-        startDate?.setHours(hours);
+        startDate?.setHours(adjustedHours);
         startDate?.setMinutes(minutes);
       } else {
-        interviewDate?.setHours(hours);
+        interviewDate?.setHours(adjustedHours);
         interviewDate?.setMinutes(minutes);
       }
       const response = await axiosInstance.put(
