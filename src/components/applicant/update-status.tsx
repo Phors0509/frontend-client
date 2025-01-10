@@ -62,16 +62,16 @@ export function UpdateStatus({
         ? toZonedTime(interviewDate, "Asia/Bangkok")
         : undefined;
       alert(`interviewDate::::${interviewDate}`);
-      alert(`utcInterviewDate::::${utcInterviewDate}`);
+      alert(`utcInterviewDate update:::${utcInterviewDate}`);
       const response = await axiosInstance.put(
         `${API_ENDPOINTS.JOB_STATUS}/${applyId}`,
         {
           status: status,
           startDate: utcStartDate
-            ? format(utcStartDate, "yyyy-MM-dd HH:mm")
+            ? format(utcStartDate, "yyyy-MM-dd'T'HH:mm:ssXXX")
             : undefined,
           interviewDate: utcInterviewDate
-            ? format(utcInterviewDate, "yyyy-MM-dd HH:mm")
+            ? format(utcInterviewDate, "yyyy-MM-dd'T'HH:mm:ssXXX")
             : undefined,
           interviewLocation,
         }
