@@ -59,10 +59,10 @@ export function UpdateStatus({
         {
           status: status,
           startDate: startDate
-            ? format(startDate, "yyyy-MM-dd HH:mm")
+            ? format(startDate, "yyyy-MM-dd'T'HH:mm:ssXXX")
             : undefined,
           interviewDate: interviewDate
-            ? format(interviewDate, "yyyy-MM-dd HH:mm")
+            ? format(interviewDate, "yyyy-MM-dd'T'HH:mm:ssXXX")
             : undefined,
           interviewLocation,
         }
