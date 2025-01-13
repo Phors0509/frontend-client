@@ -19,13 +19,13 @@ export async function middleware(request: NextRequest) {
       return authHelpers.clearAuthAndRedirect(request, "/signin");
     }
   }
-  // Make an API call to check the response
-  const response = await fetch(`${API_ENDPOINTS.CORPARATE_PROFILE_ME}`);
-  const data = await response.json();
+  // // Make an API call to check the response
+  // const response = await fetch(`${API_ENDPOINTS.CORPARATE_PROFILE_ME}`);
+  // const data = await response.json();
 
-  if (!data || data.length === 0) {
-    return authHelpers.clearAuthAndRedirect(request, "/signin");
-  }
+  // if (!data || data.length === 0) {
+  //   return authHelpers.clearAuthAndRedirect(request, "/signin");
+  // }
 
   if (pathname === "/") {
     return NextResponse.redirect(new URL("/signin", request.url));

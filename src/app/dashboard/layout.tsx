@@ -5,6 +5,7 @@ import { SidebarProvider } from "@/context/SidebarContext";
 import SideBarCom from "@/components/SideBarCom";
 import { SocketContextProvider } from "@/context/SocketContext";
 import { JobProvider } from "@/context/JobContext";
+import AuthGuard from "../(Auth)/authguard/AuthGuard";
 
 const layout = ({ children }: { children: ReactNode }) => {
   return (
@@ -19,7 +20,9 @@ const layout = ({ children }: { children: ReactNode }) => {
           <SideBarCom/>
           <div className="w-full h-screen px-5 pt-16 overflow-y-auto bg-slate-50 dark:bg-[#181f39]">
             {/* <DynamicBreadcrumb /> */}
-            {children}
+            <AuthGuard>
+              {children}
+            </AuthGuard>
           </div>
         </div>
       </div>
