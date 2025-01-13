@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { API_ENDPOINTS } from "../const/api-endpoints";
 
 export const authHelpers = {
   refreshAccessToken: (refresh_token: string, username: string) => {
@@ -70,4 +71,25 @@ export const authHelpers = {
       return response;
     });
   },
+  // getMe : (response : NextResponse)=> {
+  //   return fetch(`${API_ENDPOINTS.USER_PROFILE}/me`, {
+  //     method: "GET",
+  //   })
+  //     .then(response => {
+  //       if (response === null || []) {
+  //         return NextResponse.redirect(new URL("/dashboard/chart", request.url));
+  //         throw new Error("Failed to fetch user details");
+
+  //       }
+  //       return response.json();
+  //     })
+  //     .then(data => {
+  //       return data;
+  //     })
+  //     .catch(error => {
+  //       console.error("Failed to fetch user details:", error);
+  //       return null;
+  //     });
+
+  // }
 };
