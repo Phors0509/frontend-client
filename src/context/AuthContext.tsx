@@ -27,9 +27,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);   
+  const [isInitialized, setIsInitialized] = useState(false); // Add this
   const router = useRouter();
 
   const fetchUser = async () => {
+    // Don't fetch if we already have user data
+    if (user || isInitialized) return;
+    
     try {
       setIsLoading(true);
       const res = await axiosInstance.get(`${API_ENDPOINTS.CORPARATE_PROFILE_ME}`);
@@ -49,13 +53,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       router.push('/signin');
     } finally {
       setIsLoading(false);
+      setIsInitialized(true); // Mark as initialized
     }
   };
 
   useEffect(() => {
     fetchUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isInitialized]);
 
   const signUp = async (data: SignUpData) => {
     setIsLoading(true);
